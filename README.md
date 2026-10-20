@@ -15,7 +15,7 @@ Open port 3000 locally. `npm run lint`, `npm run typecheck`, and `npm run build`
 
 ## Configuration
 
-Edit `src/config/site.ts` for WhatsApp and social URLs. Unconfirmed social URLs are `null` and render as noninteractive “Coming soon” placeholders. Add verified HTTPS URLs to activate the links. Instagram, Threads, Facebook, and TikTok are included.
+Edit `src/config/site.ts` for WhatsApp and social URLs. Social URLs set to `null` are hidden; add verified HTTPS URLs for Instagram, Threads, TikTok, or Facebook to show their icons in the CTA and footer. Site copy is in Bahasa Melayu.
 
 Set `NEXT_PUBLIC_SITE_URL` to the actual production origin (for example `https://your-domain.com`) in Vercel before deploying so social metadata resolves to your domain. The local fallback is a reserved example domain, not a claimed live site.
 
