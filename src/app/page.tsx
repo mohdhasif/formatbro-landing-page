@@ -113,8 +113,15 @@ const faqs = [
   },
   {
     q: "Boleh repair hardware (skrin, bateri, motherboard)?",
-    a: "Buat masa ni FormatBro fokus pada servis software sahaja. Kalau tak pasti masalah anda software atau hardware, tanya je dulu.",
+    a: "Buat masa ni FormatBro fokus pada format, install dan troubleshoot Windows — tak termasuk repair hardware. Kalau tak pasti masalah anda software atau hardware, tanya je dulu.",
   },
+];
+
+const chat = [
+  { from: "me", text: "Bro, laptop saya slow gila. Boleh format?" },
+  { from: "bro", text: "Boleh! Laptop model apa & area mana?" },
+  { from: "me", text: "Acer Aspire. Esok petang boleh datang?" },
+  { from: "bro", text: "Boleh, saya datang esok petang 👍" },
 ];
 
 const marquee = [
@@ -175,7 +182,7 @@ export default function Home() {
           <div className="hero-copy">
             <div className="pill">
               <span className="status-dot" />
-              Servis onsite · Laptop &amp; PC
+              Kami datang ke rumah anda
             </div>
             <h1>
               Laptop slow?
@@ -183,8 +190,9 @@ export default function Home() {
               <span className="gradient-text">Format, laju balik.</span>
             </h1>
             <p className="hero-description">
-              Servis format Windows, install software &amp; driver — kami datang
-              ke tempat anda. Booking senang, terus di WhatsApp.
+              Servis format Windows untuk laptop &amp; PC. Kami datang ke rumah
+              atau pejabat anda, format &amp; setup sampai siap. Booking terus di
+              WhatsApp.
             </p>
             <div className="hero-actions">
               <Booking message="Hi FormatBro! Saya nak tanya pasal servis format." />
@@ -194,10 +202,10 @@ export default function Home() {
             </div>
             <ul className="hero-assurance">
               <li>
-                <Check size={15} /> Harga confirm dulu
+                <Check size={15} /> Datang ke tempat anda
               </li>
               <li>
-                <Check size={15} /> Tanpa jargon teknikal
+                <Check size={15} /> Harga confirm dulu
               </li>
               <li>
                 <Check size={15} /> Laptop &amp; PC
@@ -205,54 +213,49 @@ export default function Home() {
             </ul>
           </div>
 
-          <div className="hero-art" role="img" aria-label="Ilustrasi proses format Windows yang telah siap">
+          <div
+            className="hero-art"
+            role="img"
+            aria-label="Contoh perbualan booking servis FormatBro di WhatsApp"
+          >
             <div className="glow" />
-            <div className="app-window">
-              <div className="window-bar">
-                <span className="traffic">
-                  <i />
-                  <i />
-                  <i />
+            <div className="phone">
+              <div className="chat-head">
+                <span className="chat-avatar" aria-hidden="true">
+                  f<span>_</span>
                 </span>
-                <span>FormatBro.exe</span>
-                <span />
+                <div>
+                  FormatBro
+                  <small>online</small>
+                </div>
               </div>
-              <div className="window-body">
-                <div className="win-logo">
-                  <i />
-                  <i />
-                  <i />
-                  <i />
-                </div>
-                <ul className="checklist">
-                  {[
-                    "Backup dibincang",
-                    "Windows 11 dipasang",
-                    "Driver lengkap",
-                    "Software siap setup",
-                  ].map((t, i) => (
-                    <li key={t} style={{ animationDelay: `${0.5 + i * 0.45}s` }}>
-                      <span className="tick">
-                        <Check size={12} strokeWidth={3} />
-                      </span>
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-                <div className="progress">
-                  <div className="progress-bar" />
-                </div>
-                <div className="progress-meta">
-                  <span>Siap, bro.</span>
-                  <span>100%</span>
+              <div className="chat-body">
+                {chat.map(({ from, text }, i) => (
+                  <p
+                    key={text}
+                    className={`bubble ${from}`}
+                    style={{ animationDelay: `${0.4 + i * 0.6}s` }}
+                  >
+                    {text}
+                  </p>
+                ))}
+                <div className="job-card" style={{ animationDelay: `${0.4 + chat.length * 0.6}s` }}>
+                  <span className="job-title">
+                    <Check size={14} strokeWidth={3} /> Servis siap
+                  </span>
+                  <ul>
+                    <li>Windows 11 dipasang</li>
+                    <li>Driver lengkap</li>
+                    <li>Apps siap setup</li>
+                  </ul>
                 </div>
               </div>
             </div>
             <div className="float-chip chip-a">
-              <Zap size={16} /> Laju balik
+              <MapPin size={16} /> Datang ke rumah
             </div>
             <div className="float-chip chip-b">
-              <ShieldCheck size={16} /> Bersih &amp; selamat
+              <Zap size={16} /> Laju balik
             </div>
           </div>
         </section>
@@ -286,7 +289,7 @@ export default function Home() {
         <section id="servis" className="section shell reveal">
           <div className="section-head">
             <span className="eyebrow">Servis kami</span>
-            <h2>Semua hal software, settle.</h2>
+            <h2>Apa yang kami buat untuk device anda.</h2>
             <p>Dari format penuh sampai error yang degil — klik mana-mana servis untuk tanya terus.</p>
           </div>
           <div className="bento">
@@ -442,9 +445,9 @@ export default function Home() {
           <div>
             <Logo />
             <p>
-              Servis software laptop &amp; PC di Malaysia.
+              Servis format laptop &amp; PC di Malaysia.
               <br />
-              Sistem segar. Kurang stress.
+              Kami datang ke tempat anda.
             </p>
           </div>
           <div className="footer-links">
@@ -461,7 +464,7 @@ export default function Home() {
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} FormatBro. Hak cipta terpelihara.</span>
           <span>
-            <MapPin size={13} /> Malaysia · Servis software sahaja
+            <MapPin size={13} /> Malaysia · Servis datang ke rumah
           </span>
         </div>
       </footer>
