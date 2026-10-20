@@ -43,7 +43,7 @@ export default function Image() {
         Format, laju balik.
       </div>
       <div style={{ fontSize: 24, color: "#919aa9", marginTop: 35 }}>
-        Format Windows · Install software & driver · Booking di WhatsApp
+        Servis format laptop & PC · Kami datang ke tempat anda
       </div>
     </div>,
     size,
