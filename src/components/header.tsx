@@ -1,23 +1,45 @@
 "use client";
-import { useState } from "react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 import { site } from "@/config/site";
+import { BrandIcon } from "@/components/brand-icons";
+
+const links = [
+  ["Servis", "servis"],
+  ["Cara booking", "cara-booking"],
+  ["Soalan lazim", "faq"],
+];
+
+export function Logo() {
+  return (
+    <a className="logo" href="#" aria-label="FormatBro — laman utama">
+      <span className="logo-mark" aria-hidden="true">
+        f<span>_</span>
+      </span>
+      Format<span className="accent">Bro</span>
+    </a>
+  );
+}
+
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   return (
-    <header className="header">
+    <header className={`header ${scrolled || open ? "is-scrolled" : ""}`}>
       <div className="shell nav">
-        <a className="logo" href="#" aria-label="FormatBro home">
-          <span className="logo-mark">
-            f<span>_</span>
-          </span>
-          Format<span className="blue">Bro</span>
-          <span className="logo-dot">®</span>
-        </a>
-        <nav aria-label="Main navigation" className="desktop-nav">
-          <a href="#services">Services</a>
-          <a href="#how-it-works">How it works</a>
-          <a href="#why-us">Why FormatBro</a>
+        <Logo />
+        <nav aria-label="Navigasi utama" className="desktop-nav">
+          {links.map(([label, id]) => (
+            <a key={id} href={`#${id}`}>
+              {label}
+            </a>
+          ))}
         </nav>
         <a
           className="nav-book"
@@ -25,11 +47,12 @@ export function Header() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Let’s talk <ArrowUpRight size={15} />
+          <BrandIcon name="WhatsApp" size={16} />
+          WhatsApp
         </a>
         <button
           className="menu-toggle"
-          aria-label={open ? "Close menu" : "Open menu"}
+          aria-label={open ? "Tutup menu" : "Buka menu"}
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen(!open)}
@@ -38,16 +61,8 @@ export function Header() {
         </button>
       </div>
       {open && (
-        <nav
-          id="mobile-nav"
-          className="mobile-nav"
-          aria-label="Mobile navigation"
-        >
-          {[
-            ["Services", "services"],
-            ["How it works", "how-it-works"],
-            ["Why FormatBro", "why-us"],
-          ].map(([label, id]) => (
+        <nav id="mobile-nav" className="mobile-nav" aria-label="Navigasi mudah alih">
+          {links.map(([label, id]) => (
             <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>
               {label}
             </a>
